@@ -31,3 +31,24 @@ define('定数名', '値');
 - MAMP開く→スタートページ→ツール（phpadmin）開く
 - データベース作成→テーブル作成
 - usersテーブル作成(id, email, pass, login_time)
+- デフォルトではuser,passwordはroot
+```
+$dsn = 'DB種類:dbname=DBの名前;host=ホスト名;charset=文字コード';
+$user = 'root';
+$password = 'root';
+```
+- $options内は使い回しでおK
+- PDOはphpからDBに接続するために使用するオブジェクト（PHP Data Object）
+- prepareメソッドを使用し、ユーザーの入力情報をSQLに反映
+- queryメソッドを利用して、SQL文を実行する場合はユーザからの入力をSQL文に含めることが出来ません
+- prepareメソッドを利用して、SQL文を実行する場合はユーザからの入力をSQL文に含める事が出来ます。
+```
+// ユーザからの入力情報を含むSQL文の作成
+$sql = 'Insert into テーブル名(カラム名) values(:変数)'　;
+// ユーザの入力情報をSQL文に含める準備
+$statement = $database->prepare($sql);
+// SQL文にユーザからの入力情報を代入
+$statement->bindParam(':変数', $_POST['hoge']);
+// ユーザからの入力情報を含んだSQLを実行
+$statement->execute();
+```

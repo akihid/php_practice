@@ -11,6 +11,7 @@ ini_set('display_errors' , 'On'); //画面にエラーを表示させる
     define('MSG03', 'パスワード（再入力）があっていません');
     define('MSG04', '半角英数字のみご利用いただけます');
     define('MSG05', '６文字以上で入力してください');
+    define('MSG06', 'すでに登録されています');
 
     //配列$err_msgを用意
     $err_msg = array();
@@ -69,12 +70,26 @@ ini_set('display_errors' , 'On'); //画面にエラーを表示させる
           $dbn = new PDO($dsn, $user, $password, $options);
 
           //SQL文（クエリー作成)
-          $stmt = $dbn->prepare('INSERT INTO users(email, pass, login_time) VALUES (:email, :pass, :login_time)');
+          $stmt = $dbn->prepare('SELECT COUNT(*) AS cnt FROM users WHERE email = ?');
 
           //プレースホルダに値をセットし、SQL実行
-          $stmt->execute(array(':email' => $email, ':pass' => $pass, ':login_time' => date('Y-m-d H:i:s')));
+          $stmt->execute([$email]);
 
-          header("Location:mypage.php");  //マイページへ
+          $count = (int)$stmt->fetchColumn();
+
+          if ($count > 0) {
+            $err_msg['email'] = MSG06;
+          }else{
+            //SQL文（クエリー作成)
+            $stmt = $dbn->prepare('INSERT INTO users(email, pass, login_time) VALUES (:email, :pass, :login_time)');
+
+            //プレースホルダに値をセットし、SQL実行
+            $stmt->execute(array(':email' => $email, ':pass' => $pass, ':login_time' => date('Y-m-d H:i:s')));
+
+            header("Location:mypage.php");  //マイページへ
+          }
+  
+
         } 
       }
     }
