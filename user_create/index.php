@@ -50,7 +50,32 @@ ini_set('display_errors' , 'On'); //画面にエラーを表示させる
           $err_msg['pass'] = MSG05;
         }
         
-        if(empty($err_msg)) header("Location:mypage.php");  //マイページへ
+        if(empty($err_msg)){
+
+          //DBへの接続準備
+          $dsn = 'mysql:dbname=php_sample01;host=localhost;charset=utf8';
+          $user = 'root';
+          $password = 'root';
+          $options = array(
+            //SQL実行失敗時に例外スロー
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            // デフォルトフェッチモードを連想配列形式に設定
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            //バッファークエリを使う（一度に結果セットをすべて取得し、サーバー負荷を軽減
+            //SELECTで得た結果に対してもrouCountメソッドを使えるようにする
+            PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
+          );
+          // PODオブジェクト生成（DBへ接続)
+          $dbn = new PDO($dsn, $user, $password, $options);
+
+          //SQL文（クエリー作成)
+          $stmt = $dbn->prepare('INSERT INTO users(email, pass, login_time) VALUES (:email, :pass, :login_time)');
+
+          //プレースホルダに値をセットし、SQL実行
+          $stmt->execute(array(':email' => $email, ':pass' => $pass, ':login_time' => date('Y-m-d H:i:s')));
+
+          header("Location:mypage.php");  //マイページへ
+        } 
       }
     }
   }

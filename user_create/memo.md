@@ -18,9 +18,16 @@ ini_set('display_errors' , 'On'); //画面にエラーを表示させる
 - 『if(!empty($err_msg["email"]))』もerr_msgを定義していないため処理されない。
 - $_POST['formのname属性']をキーにして値を取得できる
 - preg_match("正規表現", 対象)
+- header("Location:mypage.php"); ※header関数でLocation: URL指定でリダイレクト。こいつを動かす前後に何らかの出力をすると正しくリダイレクトしない場合がある
 
 
 # define(定数の定義)
 ```
 define('定数名', '値');
 ```
+
+
+# MAMPメモ
+- MAMP開く→スタートページ→ツール（phpadmin）開く
+- データベース作成→テーブル作成
+- usersテーブル作成(id, email, pass, login_time)
