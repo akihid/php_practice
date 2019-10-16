@@ -41,3 +41,6 @@ a:hover{
   color: #545454;
   display: block;
 }
+.err_msg{
+  color: #ff4d4b;
+}
