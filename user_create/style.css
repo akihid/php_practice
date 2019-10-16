@@ -33,6 +33,16 @@ input[type="submit"]:hover{
   background: #111;
   cursor: pointer;
 }
+input[type="password"]{
+  color: #545454;
+  height: 60px;
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
 a{
   color: #545454;
   display: block;

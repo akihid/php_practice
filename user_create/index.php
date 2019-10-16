@@ -12,8 +12,7 @@ ini_set('display_errors' , 'On'); //画面にエラーを表示させる
     define('MSG04', '半角英数字のみご利用いただけます');
     define('MSG05', '６文字以上で入力してください');
 
-
-    $err_flg = false;
+    //配列$err_msgを用意
     $err_msg = array();
 
     //フォームが入力されていない場合
@@ -51,12 +50,11 @@ ini_set('display_errors' , 'On'); //画面にエラーを表示させる
           $err_msg['pass'] = MSG05;
         }
         
-        if(empty($err_msg)) header("Location:mypage.php");
+        if(empty($err_msg)) header("Location:mypage.php");  //マイページへ
       }
     }
   }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -69,11 +67,11 @@ ini_set('display_errors' , 'On'); //画面にエラーを表示させる
     <h1>ユーザー登録</h1>
     <form action="" method="post">
       <span class="err_msg"><?php if(!empty($err_msg["email"])) echo $err_msg['email']; ?></span>
-      <input type="text" name="email" placeholder="email">
+      <input type="text" name="email" placeholder="email" value="<?php if(!empty($_POST['email'])) echo $_POST['email']; ?>">
       <span class="err_msg"><?php if(!empty($err_msg["pass"])) echo $err_msg['pass']; ?></span>
-      <input type="text" name="pass" placeholder="パスワード">
+      <input type="password" name="pass" placeholder="パスワード" value="<?php if(!empty($_POST['pass'])) echo $_POST['pass']; ?>">
       <span class="err_msg"><?php if(!empty($err_msg["pass_retype"])) echo $err_msg['pass_retype']; ?></span>
-      <input type="text" name="pass_retype" placeholder="パスワード（再入力）">
+      <input type="password" name="pass_retype" placeholder="パスワード（再入力）" value="<?php if(!empty($_POST['pass_retype'])) echo $_POST['pass_retype']; ?>">
       <input type="submit" value="送信">
     </form>
     <a href="mypage.php">マイページへ</a>
