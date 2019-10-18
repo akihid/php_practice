@@ -19,6 +19,7 @@ ini_set('display_errors' , 'On'); //画面にエラーを表示させる
 - $_POST['formのname属性']をキーにして値を取得できる
 - preg_match("正規表現", 対象)
 - header("Location:mypage.php"); ※header関数でLocation: URL指定でリダイレクト。こいつを動かす前後に何らかの出力をすると正しくリダイレクトしない場合がある
+- 本来はサニタイズ、メールの重複チェック
 
 
 # define(定数の定義)
