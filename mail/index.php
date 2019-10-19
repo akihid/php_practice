@@ -12,6 +12,7 @@ if(!empty($_POST)){
 
   $msg = '';
 
+  // メール送信用のプログラム読み込み
   include('mail.php');
 }
 ?>
@@ -29,7 +30,7 @@ if(!empty($_POST)){
     <form action="" method="post">
       <input type="text" name="email" placeholder="email" value="<?php if(!empty($_POST['email'])) echo $_POST['email']; ?>">
       <input type="text" name="subject" placeholder="件名" value="<?php if(!empty($_POST['subject'])) echo $_POST['subject']; ?>">
-      <input type="textarea" name="comment" placeholder="内容" value="<?php if(!empty($_POST['comment'])) echo $_POST['comment']; ?>">
+      <textarea name="comment" placeholder="内容" value="<?php if(!empty($_POST['comment'])) echo $_POST['comment']; ?>"></textarea>
 
       <input type="submit" value="送信">
     </form>
