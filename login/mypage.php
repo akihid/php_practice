@@ -5,6 +5,9 @@
 
   session_start();
 
+  // ログインしていなければlogin画面に戻す
+  if(empty($_SESSION['login'])) header("Location:login.php");
+
 ?>
 
 <!DOCTYPE html>
