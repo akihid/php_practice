@@ -23,11 +23,11 @@
       <h1>マイページ</h1>
       <section>
         <p>
-          あなたのemailはinfo@test.comです<br/>
-          あなたのpassは passwordです。
+          あなたのemailは<?php echo $_SESSION['email'] ?>です<br/>
+          あなたのpassは <?php echo $_SESSION['pass'] ?>です。
         </p>
       </section>
-      <a href="index.php">ユーザー登録画面へ</a>
+      <a href="logout.php">ログアウト</a>
     <?php }else{ ?>
       <p>ログイン必須</p>
     <?php } ?>

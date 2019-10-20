@@ -42,6 +42,8 @@ if(!empty($_POST)){
     session_start();
 
     $_SESSION['login'] = true;
+    $_SESSION['pass'] = $pass;
+    $_SESSION['email'] = $email;
 
     header("Location:mypage.php");  //マイページへ
   }
